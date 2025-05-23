@@ -22,6 +22,24 @@ pipeline {
 		export PATH=$PATH:/opt/homebrew/bin
 		npm test || true''' // Allows pipeline to continue despite test failures
             }
+            post {
+                success {
+                    emailext(
+                        subject: "Test Stage SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
+                        body: "The test stage completed successfully.\n\nConsole log: ${BUILD_URL}consoleText",
+                        to: 'rtwary141@gmail.com',
+                        attachmentsPattern: '**/build.log'
+                    )
+                }
+                failure {
+                    emailext(
+                        subject: "Test Stage FAILURE: ${JOB_NAME} #${BUILD_NUMBER}",
+                        body: "The test stage failed.\n\nConsole log: ${BUILD_URL}consoleText",
+                        to: 'rtwary141@gmail.com',
+                        attachmentsPattern: '**/build.log'
+                    )
+                }
+            }
         }
 
         stage('Generate Coverage Report') {
@@ -38,6 +56,24 @@ pipeline {
                 sh '''
 		export PATH=$PATH:/opt/homebrew/bin
 		npm audit || true''' // This will show known CVEs in the output
+            }
+            post {
+                success {
+                    emailext(
+                        subject: "Security Scan SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
+                        body: "The security scan completed successfully.\n\nConsole log: ${BUILD_URL}consoleText",
+                        to: 'rtwary141@gmail.com',
+                        attachmentsPattern: '**/build.log'
+                    )
+                }
+                failure {
+                    emailext(
+                        subject: "Security Scan FAILURE: ${JOB_NAME} #${BUILD_NUMBER}",
+                        body: "The security scan failed.\n\nConsole log: ${BUILD_URL}consoleText",
+                        to: 'rtwary141@gmail.com',
+                        attachmentsPattern: '**/build.log'
+                    )
+                }
             }
         }
     }
