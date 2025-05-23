@@ -28,7 +28,8 @@ pipeline {
                         subject: "Test Stage SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
                         body: "The test stage completed successfully.\n\nConsole log: ${BUILD_URL}consoleText",
                         to: 'rtwary141@gmail.com',
-                        attachmentsPattern: '**/build.log'
+                        attachmentsPattern: '**/build.log',
+			attachLog: true
                     )
                 }
                 failure {
@@ -36,7 +37,8 @@ pipeline {
                         subject: "Test Stage FAILURE: ${JOB_NAME} #${BUILD_NUMBER}",
                         body: "The test stage failed.\n\nConsole log: ${BUILD_URL}consoleText",
                         to: 'rtwary141@gmail.com',
-                        attachmentsPattern: '**/build.log'
+                        attachmentsPattern: '**/build.log',
+			attachLog: true
                     )
                 }
             }
@@ -63,7 +65,8 @@ pipeline {
                         subject: "Security Scan SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}",
                         body: "The security scan completed successfully.\n\nConsole log: ${BUILD_URL}consoleText",
                         to: 'rtwary141@gmail.com',
-                        attachmentsPattern: '**/build.log'
+                        attachmentsPattern: '**/build.log',
+			attachLog: true
                     )
                 }
                 failure {
@@ -71,7 +74,8 @@ pipeline {
                         subject: "Security Scan FAILURE: ${JOB_NAME} #${BUILD_NUMBER}",
                         body: "The security scan failed.\n\nConsole log: ${BUILD_URL}consoleText",
                         to: 'rtwary141@gmail.com',
-                        attachmentsPattern: '**/build.log'
+                        attachmentsPattern: '**/build.log',
+			attachLog: true
                     )
                 }
             }
