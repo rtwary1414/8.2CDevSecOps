@@ -72,7 +72,7 @@ pipeline {
                 failure {
                     emailext(
                         subject: "Security Scan FAILURE: ${JOB_NAME} #${BUILD_NUMBER}",
-                        body: "The security scan failed.\n\nConsole log: ${BUILD_URL}consoleText",
+                        body: "The security  scan failed.\n\nConsole log: ${BUILD_URL}consoleText",
                         to: 'rtwary141@gmail.com',
                         attachmentsPattern: '**/build.log',
 			attachLog: true
